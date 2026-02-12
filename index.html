@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Michael 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: linear-gradient(to bottom, #ff758c, #ff7eb3);
+    text-align: center;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Pantalla contraseña */
+#login {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #ff4d6d, #ff8fab);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+    margin: 10px;
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    background: white;
+    color: #ff4d88;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.section {
+    padding: 40px 20px;
+}
+
+.galeria img {
+    width: 80%;
+    max-width: 280px;
+    margin: 10px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+.carta {
+    background: rgba(255,255,255,0.2);
+    margin: 20px;
+    padding: 25px;
+    border-radius: 20px;
+    display: none;
+    white-space: pre-line;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="login">
+    <h2>Solo para Michael 💖</h2>
+    <p>Ingresa nuestra fecha especial (ej: 15-07-2025)</p>
+    <input type="text" id="password" placeholder="DD-MM-AAAA">
+    <button onclick="verificar()">Entrar ✨</button>
+</div>
+
+<canvas id="fireworks"></canvas>
+
+<audio id="music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div id="contenido" style="display:none;">
+
+<h1>Felices 7 Meses Michael 💕</h1>
+
+<div class="section">
+    <h2>Llevamos juntos:</h2>
+    <h3 id="contador"></h3>
+</div>
+
+<div class="section">
+    <h2>Desde aquel cumpleaños 🎂</h2>
+    <p>
+Desde ese día fue como si el mundo se detuviera.
+Amor a primera vista… y 7 meses después,
+sigo eligiéndote todos los días. 💖
+    </p>
+</div>
+
+<div class="section galeria">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+    <img src="foto4.jpg">
+    <img src="foto5.jpg">
+    <img src="foto6.jpg">
+    <img src="foto7.jpg">
+</div>
+
+<div class="section">
+    <button onclick="abrirCarta()">Abrir mi corazón 💌</button>
+
+    <div class="carta" id="carta">
+Michael,
+
+desde ese cumpleaños donde nuestras miradas se cruzaron,
+supe que algo especial comenzaba.
+
+Estos 7 meses han sido los más bonitos de mi vida.
+Gracias por cada risa, cada abrazo y cada momento.
+
+Eres mi lugar seguro,
+mi casualidad favorita
+y mi amor a primera vista que se convirtió en certeza.
+
+Te amo infinitamente.
+
+— Nadia 💖
+    </div>
+</div>
+
+</div>
+
+<script>
+const contraseñaCorrecta = "12-07-2025"; // CAMBIA POR TU FECHA REAL
+
+function verificar(){
+    const pass = document.getElementById("password").value;
+    if(pass === contraseñaCorrecta){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("contenido").style.display = "block";
+        document.getElementById("music").play();
+    } else {
+        alert("Esa no es nuestra fecha especial 💔");
+    }
+}
+
+const fechaInicio = new Date("2025-07-12"); // CAMBIA POR TU FECHA REAL
+
+function actualizarContador(){
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+
+    const dias = Math.floor(diferencia / (1000*60*60*24));
+    const horas = Math.floor((diferencia / (1000*60*60)) % 24);
+    const minutos = Math.floor((diferencia / (1000*60)) % 60);
+
+    document.getElementById("contador").innerHTML =
+        dias + " días " + horas + " horas " + minutos + " minutos 💖";
+}
+
+setInterval(actualizarContador, 1000);
+
+function abrirCarta(){
+    document.getElementById("carta").style.display = "block";
+    lanzarFuegos();
+}
+
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+function lanzarFuegos(){
+    for(let i=0;i<120;i++){
+        ctx.beginPath();
+        ctx.arc(Math.random()*canvas.width,
+                Math.random()*canvas.height,
+                3,0,Math.PI*2);
+        ctx.fillStyle="white";
+        ctx.fill();
+    }
+    setTimeout(()=>ctx.clearRect(0,0,canvas.width,canvas.height),600);
+}
+</script>
+
+</body>
+</html>
